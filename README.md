@@ -12,7 +12,8 @@ NTLM Relay è un tipo di attacco informatico che sfrutta le debolezze del protoc
  - Macchina Attaccante (Kali Linux) 
 
  #### Sintesi dell'attacco ####
- Per rendere possibile l'attacco si è partiti da una mail di "spear phishing" contenente un un link malevolo (T1566.002 Mitre Att@ck) in cui si informa il "destinatario" che è necessario effettuare il "download" di un aggiornamento "critico" del sistema operativo, da un sottodominio "microsoft.com". Per redirigere il link "malevolo" verso la macchina attaccante si è utilizzato un attacco "DNS Spoofing" (T1584.002 Atta&ck). Per rendere "credibile" il sito da cui effettuare l'*aggiornamento* si è creata una fittizia pagina "microsoft" fornita da un server web in esecuzione sulla macchina dell'*attaccante* che riproduce il sito ufficiale e sulla quale è presente un pulsante "Download" che redirige ad una "risorsa di rete" sulla macchina dell'*attaccante*.   
+ Preliminarmente si è effettuata una fase di "enumerazione" della rete *target* 
+ Per rendere possibile l'attacco si è partiti da una mail di "spear phishing" contenente un un link malevolo (T1566.002 Mitre Att@ck) in cui si informa il "destinatario" che è necessario effettuare il "download" di un aggiornamento "critico" del sistema operativo, da un sottodominio "microsoft.com". Per redirigere il link "malevolo" verso la macchina attaccante si è utilizzato un attacco "DNS Spoofing" (T1584.002 Att&ck). Per rendere "credibile" il sito da cui effettuare l'*aggiornamento* si è creata una fittizia pagina "microsoft" fornita da un server web in esecuzione sulla macchina dell'*attaccante* che riproduce il sito ufficiale e sulla quale è presente un pulsante "Download" che redirige ad una "risorsa di rete" sulla macchina dell'*attaccante*.   
  
 
 **diobon**
