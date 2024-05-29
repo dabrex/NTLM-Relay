@@ -1,4 +1,8 @@
-## NTLM-Relay
+# NTLM-Relay Attack
+
+## Threath Model: L'*attaccante* è un computer della rete del *target*
+
+
 
 
 **diobon**
@@ -9,3 +13,10 @@ fun arg {
     codice;
 }
 ```
+
+[testo](https://)
+
+----------
+
+* efw
+* eojfij
