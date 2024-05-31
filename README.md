@@ -49,7 +49,7 @@ Da questa prima fase di 'enumerazione' si recuperano le seguenti informazioni:
 #### Passo 2 - Enumerazione CRACKMAPEXEC ####
 
  ```python
- sudo crackmapexec smb 10.0.0.0/24 --gen-relay-list /home/kali/Desktop/targets2.txt (identificazione servizi SMB esecuzione sulla rete e generazione di lista in file .txt)
+ sudo crackmapexec smb 10.0.0.0/24 --gen-relay-list /home/kali/Desktop/targets1.txt (identificazione servizi SMB esecuzione sulla rete e generazione di lista in file .txt)
  ```
 
 Da questa fase di 'enumerazione' si recuperano le seguenti informazioni:
@@ -88,7 +88,7 @@ Avvio seconda sessione **ettercap**:
 `sudo ettercap -T -q -i eth0 dns_spoof`
 * Il plugin **dns_spoof** intercetta le richieste DNS che passano attraverso la rete. Quando una richiesta DNS viene intercettata, **ettercap** risponde con una risposta falsa, reindirizzando il traffico verso un indirizzo IP specificato dall'*attaccante*.
 
-#### Passo 7 opzione 1 - Cattura delle credenziali dell *vittima* con RESPONDER ####
+#### Passo 7 (opzionale) - Cattura delle credenziali dell *vittima* con RESPONDER ####
 Sulla macchina *attaccante* si avvia il software **responder**:
 
 `sudo responder -i eth0 -A`
@@ -99,5 +99,11 @@ Nel momento in cui la *vititma* 'clicca' sul pulsante 'Download' (che in realtà
 
 ![responder](Responder.jpg)
 
-Le 'credenziali **NTLMv2** catturate possono essere utilizzate in modalità *offline* per effettuare "password-cracking" attraverso *tools* come **John the Ripper** o **Hashcat**.
+Le credenziali **NTLMv2 hash** catturate possono essere utilizzate in modalità *offline* per effettuare "password-cracking" attraverso *tools* come **John the Ripper** o **Hashcat**.
 
+#### Passo 8 - NTLM-Relay verso server *target* (IP 10.0.0.10) ####
+Per effettuare l'attacco NTLM-Relay vero e proprio si è utilizzato il software **ntlmrelayx** compreso nella 'suite' di strumenti **impacket**.
+
+`sudo impacket-ntlmrelayx -tf /home/kali/Desktop/target1.txt -smb2 -socks`
+
+* **impacket-ntlmrelayx** ascolta le richieste di autenticazione NTLM che passano attraverso la rete. Quando intercetta una richiesta, 'inoltra' le credenziali NTLM verso uno dei target specificati nel file /home/kali/Desktop/target1.txt (ottenuto nel **Passo 2**) usando il protocollo **SMBv2**. Viene avviato un **Server SOCKS** che consente di instradare il traffico di rete attraverso le connessioni 'inoltrate' ed eseguire operazioni di rete come se si fosse direttamente collegati al *target*.  
