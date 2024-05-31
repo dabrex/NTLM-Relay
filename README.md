@@ -68,7 +68,7 @@ Da questa fase di 'enumerazione' si recuperano le seguenti informazioni:
 - Creazione di Finta Pagina HTML con CSS e immagini
 - Caricamento del materiale HTML 'prodotto' nella cartella '/var/www/html/' sulla macchina *attaccante*
 - Avvio del server web 'Apache' sulla macchina *attaccante*
-- Risultato della 'Finta Pagina Microsoft' visualizzabile [qui](https://github.com/dabrex/NTLM-Relay/main/Sito-Microsoft-Fasullo.jpg)
+- Risultato della 'Finta Pagina Microsoft' visualizzabile ![qui](https://github.com/dabrex/NTLM-Relay/main/Sito-Microsoft-Fasullo.jpg)
 
 [testo](https://)
 1. first
