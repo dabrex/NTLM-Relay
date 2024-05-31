@@ -21,7 +21,19 @@ NTLM Relay è un tipo di attacco informatico che sfrutta le debolezze del protoc
 
  Una volta acceduti, per garantire la "persistenza"  si è creato un file eseguibile windows che avvia una "reverse shell" (T1219 Att&ck) già 'settata' per connettersi all'indirizzo IP dell'*attaccante* ad una determinata porta. A supporto si è utilizzato il software "MSFVENOM". 
 
- Per il trasferimento della 'reverse-shell' sul *target* (NTLM-SRV01) si è utilizzato il software "PROXYCHAIN4" che sfruttando il server 'socks' aperto con 'ntlmrelayx' permette di eseguire il software "SMBCLIENT" utilizzato per interagire con condivisioni di rete "SMB" sul *target*.    
+ Per il trasferimento della 'reverse-shell' sul *target* (NTLM-SRV01) si è utilizzato il software "PROXYCHAIN4" che sfruttando il server 'socks' aperto con 'ntlmrelayx' permette di eseguire il software "SMBCLIENT" utilizzato per interagire con condivisioni di rete "SMB" sul *target*.
+
+ La "reverse-shell" è stata posizionata nella cartella "C:\Windows\System32" sfruttando il fatto che le credenziali utilizzate nel relay hanno 'diritti amministrativi' ed il file è stato denominato 'whoani.exe' nel tentativo di 'confonderlo' con il già presente "whoami.exe". 
+
+ Sulla macchina *attaccante* si è avviato il software "NC (netcat)" settandolo in ascolto sulla porta impostata nella "reverse-shell". 
+
+ Per 'avviare' il processo della 'reverse-shell' si è sfruttato ancora 'proxychain4' per eseguire il software "SMBEXEC".  
+
+ Al fine di rendere 'definitiva' la persistenza nel sistema *target* si è impostata una "Scheduled Task" (T1053.005 Att&ck) che in fase di avvio del sistema *target* mette in esecuzione la 'reverse-shell'. 
+
+ Per eliminare le 'tracce' dell'attività eseguta sul *target* si è utilizzato un comando "POWERSHELL" impartito attraverso 'smbexec' che rimuove tutti i "log di sistema" sul *target*.
+ 
+      
  
 
 **diobon**
