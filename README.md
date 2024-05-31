@@ -99,3 +99,5 @@ Nel momento in cui la *vititma* 'clicca' sul pulsante 'Download' (che in realtà
 
 ![responder](Responder.jpg)
 
+Le 'credenziali **NTLMv2** catturate possono essere utilizzate in modalità *offline* per effettuare "password-cracking" attraverso *tools* come **John the Ripper** o **Hashcat**.
+
