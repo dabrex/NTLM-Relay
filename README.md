@@ -40,7 +40,7 @@ NTLM Relay è un tipo di attacco informatico che sfrutta le debolezze del protoc
 #### Passo 1 - Enumerazione NMAP ####
 
 ```python
- sudo nmap -sV 10.0.0.0/24 //(identificazione servizi in esecuzione sulla rete)
+ sudo nmap -sV 10.0.0.0/24 (identificazione servizi in esecuzione sulla rete)
  ```
 Da questa prima fase di 'enumerazione' si recuperano le seguenti informazioni:
 - nr.03 macchine windows con indirizzi **IP 10.0.0.1, 10.0.0.10, 10.0.0.100**
@@ -49,7 +49,7 @@ Da questa prima fase di 'enumerazione' si recuperano le seguenti informazioni:
 #### Passo 2 - Enumerazione CRACKMAPEXEC ####
 
  ```python
- sudo crackmapexec smb 10.0.0.0/24 --gen-relay-list /home/kali/Desktop/targets2.txt  //(identificazione servizi SMB esecuzione sulla rete e generazione di lista in file .txt)
+ sudo crackmapexec smb 10.0.0.0/24 --gen-relay-list /home/kali/Desktop/targets2.txt (identificazione servizi SMB esecuzione sulla rete e generazione di lista in file .txt)
  ```
 
 Da questa fase di 'enumerazione' si recuperano le seguenti informazioni:
@@ -58,7 +58,7 @@ Da questa fase di 'enumerazione' si recuperano le seguenti informazioni:
 #### Passo 3 - Enumerazione NBTSCAN ####
 
  ```python
- sudo nbtscan 10.0.0.0/24  //(identificazione nomi 'netbios' delle macchine sulla rete)
+ sudo nbtscan 10.0.0.0/24 (identificazione nomi 'netbios' delle macchine sulla rete)
  ```
 
 Da questa fase di 'enumerazione' si recuperano le seguenti informazioni:
