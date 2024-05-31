@@ -12,7 +12,7 @@ NTLM Relay è un tipo di attacco informatico che sfrutta le debolezze del protoc
  - Macchina Attaccante (Kali Linux) 
 
  #### Sintesi dell'attacco ####
- Preliminarmente si è effettuata una fase di "enumerazione" della rete *target* (T1046 Mitre Att&ck)............... attraverso il software "CRACKMAPEXEC".
+ Preliminarmente si è effettuata una fase di "enumerazione" della rete *target* (T1046 Mitre Att&ck)............... attraverso i software "NMAP" e "CRACKMAPEXEC".
  Per rendere possibile l'attacco si è partiti da una mail di "spear phishing" contenente un link malevolo (T1566.002  Att@ck) in cui si informa la "vittima" che è necessario effettuare il "download" di un aggiornamento "critico" del sistema operativo, da un sottodominio "microsoft.com". Per redirigere il link "malevolo" verso la macchina attaccante si è utilizzato un attacco "DNS Spoofing" (T1584.002 Att&ck) [Software ETTERCAP]. Per rendere "credibile" il sito da cui effettuare l'*aggiornamento* si è creata una fittizia pagina "microsoft" fornita da un server web in esecuzione sulla macchina dell'*attaccante* che riproduce il sito ufficiale e sulla quale è presente un pulsante "Download" che redirige alla macchina dell'*attaccante*. Per carpire le credenziali utente dalla macchina *vittima* si è utilizzato sulla macchina *attaccante* il software "RESPONDER" che intercetta le richieste LLMNR (Link-Local Multicast Name Resolution) e NBT-NS(NetBIOS Name Service) che la macchina *vittima* utilizza quando non riesce a 'connettersi' ad un 'servizio' o un 'host' utililizzando DNS. "RESPONDER" risponde fingendosi l'host richiesto. La *vittima* invia le credenziali NTLM per autenticarsi. L'NTLMv2 intercettato può essere utilizzato:
  -  per ottenere le credenziali in 'chiaro' mediante 'password cracking offline" (T1110.002 Att&ck) [john_the_ripper, hashcat]
  - per attacchi 'pass_the_hash' (T1550.002 Att&ck). 
@@ -31,9 +31,19 @@ NTLM Relay è un tipo di attacco informatico che sfrutta le debolezze del protoc
 
  Al fine di rendere 'definitiva' la persistenza nel sistema *target* si è impostata una "Scheduled Task" (T1053.005 Att&ck) che in fase di avvio del sistema *target* mette in esecuzione la 'reverse-shell'. 
 
- Per eliminare le 'tracce' dell'attività eseguta sul *target* si è utilizzato un comando "POWERSHELL" impartito attraverso 'smbexec' che rimuove tutti i "log di sistema" sul *target*.
- 
-      
+ Per eliminare le 'tracce' dell'attività eseguita sul *target* si è utilizzato un comando "POWERSHELL" impartito attraverso 'smbexec' che rimuove tutti i "log di sistema" sul *target*.
+
+ #### Dettaglio dell'attacco passo-passo ####
+
+* Passo 1 - Enumerazione NMAP
+
+```python
+ sudo nmap -sV 10.0.0.0/24 
+ ```
+Da questa prima fase di 'enumerazione' si recuperano le seguenti informazioni:
+- nr.03 macchine windows con indirizzi IP 10.0.0.1, 10.0.0.10, 10.0.0.100
+- macchina 10.0.0.100 = Domain controller; nome macchina = **NTLM-DC**; nome dominio = **NTLMLAB.local**; ha il servizio **DNS** attivo.
+
  
 
 **diobon**
