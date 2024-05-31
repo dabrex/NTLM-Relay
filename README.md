@@ -11,8 +11,8 @@ NTLM Relay è un tipo di attacco informatico che sfrutta le debolezze del protoc
  - Macchina Vittima (win 2019) denominata "MTLMvictim"
  - Macchina Attaccante (Kali Linux) 
 
- #### Sintesi dell'attacco ####
- Preliminarmente si è effettuata una fase di "enumerazione" della rete *target* (T1046 Mitre Att&ck)............... attraverso i software "NMAP" e "CRACKMAPEXEC".
+ ### Sintesi dell'attacco ###
+ Preliminarmente si è effettuata una fase di "enumerazione" della rete *target* (T1046 Mitre Att&ck)............... attraverso i software "NMAP", "CRACKMAPEXEC", "NBTSCAN".
  Per rendere possibile l'attacco si è partiti da una mail di "spear phishing" contenente un link malevolo (T1566.002  Att@ck) in cui si informa la "vittima" che è necessario effettuare il "download" di un aggiornamento "critico" del sistema operativo, da un sottodominio "microsoft.com". Per redirigere il link "malevolo" verso la macchina attaccante si è utilizzato un attacco "DNS Spoofing" (T1584.002 Att&ck) [Software ETTERCAP]. Per rendere "credibile" il sito da cui effettuare l'*aggiornamento* si è creata una fittizia pagina "microsoft" fornita da un server web in esecuzione sulla macchina dell'*attaccante* che riproduce il sito ufficiale e sulla quale è presente un pulsante "Download" che redirige alla macchina dell'*attaccante*. Per carpire le credenziali utente dalla macchina *vittima* si è utilizzato sulla macchina *attaccante* il software "RESPONDER" che intercetta le richieste LLMNR (Link-Local Multicast Name Resolution) e NBT-NS(NetBIOS Name Service) che la macchina *vittima* utilizza quando non riesce a 'connettersi' ad un 'servizio' o un 'host' utililizzando DNS. "RESPONDER" risponde fingendosi l'host richiesto. La *vittima* invia le credenziali NTLM per autenticarsi. L'NTLMv2 intercettato può essere utilizzato:
  -  per ottenere le credenziali in 'chiaro' mediante 'password cracking offline" (T1110.002 Att&ck) [john_the_ripper, hashcat]
  - per attacchi 'pass_the_hash' (T1550.002 Att&ck). 
@@ -33,31 +33,44 @@ NTLM Relay è un tipo di attacco informatico che sfrutta le debolezze del protoc
 
  Per eliminare le 'tracce' dell'attività eseguita sul *target* si è utilizzato un comando "POWERSHELL" impartito attraverso 'smbexec' che rimuove tutti i "log di sistema" sul *target*.
 
- #### Dettaglio dell'attacco passo-passo ####
+ -------------------
 
-* Passo 1 - Enumerazione NMAP
+ ### Dettaglio dell'attacco passo-passo ###
+
+#### Passo 1 - Enumerazione NMAP ####
 
 ```python
- sudo nmap -sV 10.0.0.0/24 
+ sudo nmap -sV 10.0.0.0/24 //(identificazione servizi in esecuzione sulla rete)
  ```
 Da questa prima fase di 'enumerazione' si recuperano le seguenti informazioni:
-- nr.03 macchine windows con indirizzi IP 10.0.0.1, 10.0.0.10, 10.0.0.100
+- nr.03 macchine windows con indirizzi **IP 10.0.0.1, 10.0.0.10, 10.0.0.100**
 - macchina 10.0.0.100 = Domain controller; nome macchina = **NTLM-DC**; nome dominio = **NTLMLAB.local**; ha il servizio **DNS** attivo.
 
- 
+#### Passo 2 - Enumerazione CRACKMAPEXEC ####
 
-**diobon**
+ ```python
+ sudo crackmapexec smb 10.0.0.0/24 --gen-relay-list /home/kali/Desktop/targets2.txt  //(identificazione servizi SMB esecuzione sulla rete e generazione di lista in file .txt)
+ ```
 
-```python
-fun arg {
+Da questa fase di 'enumerazione' si recuperano le seguenti informazioni:
+- nr.02 macchine windows con SMB attivo utilizzabile per NTLM Relay con indirizzi **IP 10.0.0.1, 10.0.0.10**
 
-    codice;
-}
-```
+#### Passo 3 - Enumerazione NBTSCAN ####
+
+ ```python
+ sudo nbtscan 10.0.0.0/24  //(identificazione nomi 'netbios' delle macchine sulla rete)
+ ```
+
+Da questa fase di 'enumerazione' si recuperano le seguenti informazioni:
+- nr.03 macchine windows con nomi macchina **VICTIM, SRV01, NTLM-DC**
+
+#### Passo 4 - Preparazione Finta Pagina Microsoft ####
+- Creazione di Finta Pagina HTML con CSS e immagini
+- Caricamento del materiale HTML 'prodotto' nella cartella '/var/www/html/' sulla macchina *attaccante*
+- Avvio del server web 'Apache' sulla macchina *attaccante*
+- Risultato della 'Finta Pagina Microsoft' visualizzabile [qui](https://)
 
 [testo](https://)
-
-----------
-
-* efw
-* eojfij
+1. first
+2. second
+3. third
