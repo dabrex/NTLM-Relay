@@ -88,7 +88,7 @@ Avvio seconda sessione **ettercap**:
 `sudo ettercap -T -q -i eth0 dns_spoof`
 * Il plugin **dns_spoof** intercetta le richieste DNS che passano attraverso la rete. Quando una richiesta DNS viene intercettata, **ettercap** risponde con una risposta falsa, reindirizzando il traffico verso un indirizzo IP specificato dall'*attaccante*.
 
-#### Passo 7 - Cattura delle credenziali dell *vittima* con RESPONDER ####
+#### Passo 7 opzione 1 - Cattura delle credenziali dell *vittima* con RESPONDER ####
 Sulla macchina *attaccante* si avvia il software **responder**:
 
 `sudo responder -i eth0 -A`
@@ -98,3 +98,4 @@ Sulla macchina *attaccante* si avvia il software **responder**:
 Nel momento in cui la *vititma* 'clicca' sul pulsante 'Download' (che in realtà punta alla macchina *attaccante*) **responder** cattura le credenziali **NTLMv2** della *vittima*:
 
 ![responder](Responder.jpg)
+
