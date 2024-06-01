@@ -8,7 +8,7 @@ NTLM Relay è un tipo di attacco informatico che sfrutta le debolezze del protoc
 ### Infrastruttura creata per la simulazione ###
  - Windows 2019 Server - Domain Controller denominato "NTLM-DC"
  - Server (win 2019) denominato "NTLM-SRV01"
- - Macchina Vittima (win 2019) denominata "MTLMvictim"
+ - Macchina Vittima (win 2019) denominata "NTLM-victim"
  - Macchina Attaccante (Kali Linux) 
 
  ### Sintesi dell'attacco ###
@@ -168,4 +168,20 @@ Per garantire una nuova esecuzione della **reverse-shell** anche dopo un riavvio
 Una volta avuto accesso al *target* dalla *reverse-shell* oppure dalla shell *smbexec* (Passo 13) si può forzare la cancellazione dei 'log' del registro eventi anche in maniera selettiva o totale. Di seguito si riporta il comando per la 'cancellazione completa'.
 
 `powershell -Command "Get-EventLog -LogName * | ForEach { Clear-EventLog $_.Log }"`
+
+### Note, Links e Riferimenti ###
+L'infrastruttura 'Windows Server 2019' già configurata con:
+ - Windows 2019 Server - Domain Controller denominato "NTLM-DC"
+ - Server (win 2019) denominato "NTLM-SRV01"
+ - Macchina Vittima (win 2019) denominata "NTLM-victim"
+
+è stata scaricata da: [Link]( https://sansurl.com/ntlm-workshop-range).
+
+La macchina virtuale 'Kali Linux' utilizzata per l'attacco è stata scaricata dal sito ufficiale "Kali-Linux": [Link](https://cdimage.kali.org/kali-2024.1/kali-linux-2024.1-virtualbox-amd64.7z)
+
+Lo 'spunto' per l'attacco è derivato dalla visione di questo [video](https://www.youtube.com/watch?v=hJlLBOvXo-c).
+
+La parte dell'attacco 'NTLM-Relay' è stata modificata secondo 'esigenza' e le parti di 'Sviluppo pagina web fittizia', 'DNS Spoofing', 'Reverse-Shell', 'Persistence', 'Clear-Events-Logs' sono state prodotte in autonomia attraverso documentazione fruibile on-line e con l'aiuto di 'ChatGPT'. 
+
+
 
