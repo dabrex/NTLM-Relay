@@ -117,3 +117,4 @@ Prima dell'utilizzo di **proxychain4** è necessaria una modifica del file di co
 `sudo proxychains4 impacket-smbclient ntlmlab/victim@10.0.0.10`
 
 ![smbclient](Proxychain4-smbclient.jpg)
+
