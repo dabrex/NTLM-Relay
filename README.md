@@ -48,18 +48,19 @@ Da questa prima fase di 'enumerazione' si recuperano le seguenti informazioni:
 
 #### Passo 2 - Enumerazione CRACKMAPEXEC ####
 
- ```python
- sudo crackmapexec smb 10.0.0.0/24 --gen-relay-list /home/kali/Desktop/targets1.txt (identificazione servizi SMB esecuzione sulla rete e generazione di lista in file .txt)
- ```
+ `sudo crackmapexec smb 10.0.0.0/24 --gen-relay-list /home/kali/Desktop/targets1.txt` 
+ 
+ Identificazione servizi SMB esecuzione sulla rete e generazione di lista in file .txt.
+
 
 Da questa fase di 'enumerazione' si recuperano le seguenti informazioni:
 - nr.02 macchine windows con SMB attivo utilizzabile per NTLM Relay con indirizzi **IP 10.0.0.1, 10.0.0.10**
 
 #### Passo 3 - Enumerazione NBTSCAN ####
 
- ```python
- sudo nbtscan 10.0.0.0/24 (identificazione nomi 'netbios' delle macchine sulla rete)
- ```
+`sudo nbtscan 10.0.0.0/24`
+
+Identificazione nomi 'netbios' delle macchine sulla rete. 
 
 Da questa fase di 'enumerazione' si recuperano le seguenti informazioni:
 - nr.03 macchine windows con nomi macchina **VICTIM, SRV01, NTLM-DC**
