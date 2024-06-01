@@ -1,6 +1,6 @@
 # NTLM-Relay Attack
 
-## Threath Model: L'*attaccante* è un computer della rete del *target* (AiTM)
+## Threat Model: L'*attaccante* è un computer della rete del *target* (AiTM)
 
 ### NTLM Relay ###
 NTLM Relay è un tipo di attacco informatico che sfrutta le debolezze del protocollo di autenticazione NTLM (NT LAN Manager) utilizzato principalmente nei sistemi Windows. In questo attacco, un *attaccante* intercetta le richieste di autenticazione NTLM tra un client e un server e le inoltra a un server di destinazione, ottenendo accesso non autorizzato.
