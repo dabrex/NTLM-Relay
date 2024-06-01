@@ -151,4 +151,4 @@ Il comando mette **Netcat** in modalità di ascolto su una porta specifica (4444
 
 **smbexec** è uno strumento  del pacchetto Impacket che permette di eseguire comandi su un sistema remoto tramite il protocollo SMB.
 
-![smbexec](Proxychain4-smbexec.jpg)
+![smbexec](Proxychain4-smbexec.jpg) 
