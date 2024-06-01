@@ -108,7 +108,7 @@ Per effettuare l'attacco NTLM-Relay vero e proprio si è utilizzato il software 
 
 * **impacket-ntlmrelayx** ascolta le richieste di autenticazione NTLM che passano attraverso la rete. Quando intercetta una richiesta, 'inoltra' le credenziali NTLM verso uno dei target specificati nel file /home/kali/Desktop/target1.txt (ottenuto nel **Passo 2**) usando il protocollo **SMBv2**. Viene avviato un **Server SOCKS** che consente di instradare il traffico di rete attraverso le connessioni 'inoltrate' ed eseguire operazioni di rete sul *target*.  
 
-[ntlmrelayx](NTLMRELAYX.jpg)
+![ntlmrelayx](NTLMRELAYX.jpg)
 
 #### Passo 9 - NTLM-Relay - **proxychain4** ####
 **ntlmrelayx** con l'opzione '-socks' (Passo 8) permette attraverso l'utilizzo del software **proxychain4** di eseguire azioni sulla macchina *target*. Mantenendo attiva la shell del 'Passo 8' in una nuova shell viene utilizzato **proxychain4** per eseguire il software **smbclient** sul *target* utilizzando le credenziali della *vittima*.
@@ -116,4 +116,4 @@ Prima dell'utilizzo di **proxychain4** è necessaria una modifica del file di co
 
 `sudo proxychains4 impacket-smbclient ntlmlab/victim@10.0.0.10`
 
-[smbclient](Proxychain4 - smbclient.jpg)
+![smbclient](Proxychain4-smbclient.jpg)
