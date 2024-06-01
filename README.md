@@ -114,12 +114,12 @@ Per effettuare l'attacco NTLM-Relay vero e proprio si è utilizzato il software 
 ![ntlmrelayx](NTLMRELAYX.jpg)
 
 #### Passo 9 - NTLM-Relay - **proxychain4** ####
-**ntlmrelayx** con l'opzione '-socks' (Passo 8) permette attraverso l'utilizzo del software **proxychain4** di eseguire azioni sulla macchina *target*. Mantenendo attiva la shell del 'Passo 8' in una nuova shell viene utilizzato **proxychain4** per eseguire il software **smbclient** sul *target* utilizzando le credenziali della *vittima*.
-Prima dell'utilizzo di **proxychain4** è necessaria una modifica del file di configurazione "proxychain4.conf" per impostare la porta del proxy al valore '1080' (default 9050 tor) `socks4 127.0.0.1 1080`
+**ntlmrelayx** con l'opzione '-socks' (Passo 8) permette attraverso l'utilizzo del software **proxychains4** di eseguire azioni sulla macchina *target*. Mantenendo attiva la shell del 'Passo 8' in una nuova shell viene utilizzato **proxychains4** per eseguire il software **smbclient** sul *target* utilizzando le credenziali della *vittima*.
+Prima dell'utilizzo di **proxychains4** è necessaria una modifica del file di configurazione "proxychain4.conf" per impostare la porta del proxy al valore '1080' (default 9050 tor) `socks4 127.0.0.1 1080`
 
 `sudo proxychains4 impacket-smbclient ntlmlab/victim@10.0.0.10`
 
-![smbclient](Proxychain4-smbclient.jpg)
+![smbclient](Proxychains4-smbclient.jpg)
 
 **smbclient** permette di avere accesso alle risorse del *target* (con i privilegi dell'utente connesso nel caso specifico privilegi amministrativi quindi controllo completo.)
 
@@ -130,7 +130,7 @@ Si è provveduto a creare un file eseguibile che avvia una **reverse-shell** 'se
 
 #### Passo 11 - Upload della **Reverse-Shell** sul *target* ####
 
-Per effettuare l'upload della 'reverse-shell' implementata al 'Passo 10' si è utilizzato '**smbclient**' (via **proxychain4/ntlmrelayx[socks]**) del 'Passo 9.
+Per effettuare l'upload della 'reverse-shell' implementata al 'Passo 10' si è utilizzato '**smbclient**' (via **proxychains4/ntlmrelayx[socks]**) del 'Passo 9.
 
 * comando `shares` per visualizzare le condivisioni disponibili.
 * comando `use C$` per selezionare la risorsa C$ del SO.
@@ -151,4 +151,4 @@ Il comando mette **Netcat** in modalità di ascolto su una porta specifica (4444
 
 **smbexec** è uno strumento  del pacchetto Impacket che permette di eseguire comandi su un sistema remoto tramite il protocollo SMB.
 
-![smbexec](Proxychain4-smbexec.jpg)
+![smbexec](Proxychains4-smbexec.jpg)
