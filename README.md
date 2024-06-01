@@ -89,7 +89,10 @@ Avvio seconda sessione **ettercap**:
 `sudo ettercap -T -q -i eth0 dns_spoof`
 * Il plugin **dns_spoof** intercetta le richieste DNS che passano attraverso la rete. Quando una richiesta DNS viene intercettata, **ettercap** risponde con una risposta falsa, reindirizzando il traffico verso un indirizzo IP specificato dall'*attaccante*.
 
-> ### A questo punto si presuppone che la *vittima* abbia ricevuto la mail di 'spear phishing', abbia navigato verso l'indirizzo "http://www.criticalupdate.technet.microsoft.com" e abbia 'cliccato' sul pulsante 'Download' per effettuare lo scaricamento del 'aggiornamento' (fasullo). ###
+--------------
+
+> ### A questo punto si presuppone che la *vittima* abbia ricevuto la mail di 'spear phishing', abbia navigato verso l'indirizzo "http://www.criticalupdate.technet.microsoft.com" e abbia 'cliccato' sul pulsante 'Download' per effettuare lo scaricamento dell' 'aggiornamento' (fasullo). ###
+---------------
 
 
 #### Passo 7 (opzionale) - Cattura delle credenziali dell *vittima* con RESPONDER ####
@@ -122,7 +125,7 @@ Prima dell'utilizzo di **proxychains4** è necessaria una modifica del file di c
 
 ![smbclient](Proxychains4-smbclient.jpg)
 
-**smbclient** permette di avere accesso alle risorse del *target* (con i privilegi dell'utente connesso nel caso specifico privilegi 'amministrativi'.
+**smbclient** permette di avere accesso alle risorse del *target* (con i privilegi dell'utente connesso nel caso specifico privilegi 'amministrativi').
 
 #### Passo 10 - Creazione della **Reverse-Shell** ####
 Si è provveduto a creare un file eseguibile che avvia una **reverse-shell** 'settata' per comunicare con la macchina attaccante (**IP=10.0.0.7**) sulla '**porta 4444**' attraverso il software **msfvenom**. Viene denominata 'whoani.exe' per 'confonderla' con un 'eseguibile' presente in 'C:\Windows\System32' denominato 'whoami.exe'. 
@@ -138,7 +141,11 @@ Per effettuare l'upload della 'reverse-shell' implementata al 'Passo 10' si è u
 * comando `cd` per il 'cambio directory di destinazione'.
 * comando `put` per 'upload' del file 'whoani.exe' nella cartella 'C:\Windows\ System32\'.
 
-> Criticità riscontrata: Al fine di rendere possibile l'upload della reverse-shell di è dovuto disabilitare l'antivirus (defender) del *target* in quanto la mancanza di un offuscamento adeguato del codice dell'eseguibile consente il rilevamento di sofwtware potenzialmente dannoso da parte del *target*.
+------------------------
+
+> Criticità riscontrata: Al fine di rendere possibile l'upload della reverse-shell di è dovuto disabilitare l'antivirus (defender) del *target* in quanto la mancanza di un offuscamento adeguato del codice dell'eseguibile consente il rilevamento di softwware potenzialmente dannoso da parte del *target*.
+
+--------------------
 
 #### Passo 12 - Avvio di **Netcat (nc)** sulla macchina *attaccante* in 'attesa' della connessione da parte della **reverse-shell**  ####
 
@@ -172,6 +179,8 @@ Una volta avuto accesso al *target* dalla *reverse-shell* oppure dalla shell *sm
 
 `powershell -Command "Get-EventLog -LogName * | ForEach { Clear-EventLog $_.Log }"`
 
+----------
+
 ### Note, Links e Riferimenti ###
 L'infrastruttura 'Windows Server 2019' già configurata con:
  - Windows 2019 Server - Domain Controller denominato "NTLM-DC"
@@ -185,6 +194,8 @@ La macchina virtuale 'Kali Linux' utilizzata per l'attacco è stata scaricata da
 Lo 'spunto' per l'attacco è derivato dalla visione di questo [video](https://www.youtube.com/watch?v=hJlLBOvXo-c).
 
 La parte dell'attacco 'NTLM-Relay' è stata modificata secondo 'esigenza' e le parti di 'Sviluppo pagina web fittizia', 'DNS Spoofing', 'Reverse-Shell', 'Persistence', 'Clear-Events-Logs' sono state prodotte in autonomia attraverso documentazione fruibile on-line e con l'aiuto di 'ChatGPT'. 
+
+----------------
 
 
 
