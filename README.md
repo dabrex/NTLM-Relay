@@ -88,6 +88,10 @@ Avvio seconda sessione **ettercap**:
 `sudo ettercap -T -q -i eth0 dns_spoof`
 * Il plugin **dns_spoof** intercetta le richieste DNS che passano attraverso la rete. Quando una richiesta DNS viene intercettata, **ettercap** risponde con una risposta falsa, reindirizzando il traffico verso un indirizzo IP specificato dall'*attaccante*.
 
+ ```
+ A questo punto si presuppone che la *vittima* abbia ricevuto la mail di 'spear phishing', abbia navigato verso l'indirizzo "http://www.criticalupdate.technet.microsoft.com" e abbia 'cliccato' sul pulsante 'Download' per effettuare lo scaricamento del 'aggiornamento' (fasullo).
+ ```
+
 #### Passo 7 (opzionale) - Cattura delle credenziali dell *vittima* con RESPONDER ####
 Sulla macchina *attaccante* si avvia il software **responder**:
 
