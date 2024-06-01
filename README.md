@@ -152,3 +152,20 @@ Il comando mette **Netcat** in modalità di ascolto su una porta specifica (4444
 **smbexec** è uno strumento  del pacchetto Impacket che permette di eseguire comandi su un sistema remoto tramite il protocollo SMB.
 
 ![smbexec](Proxychains4-smbexec.jpg)
+
+Avviando da 'reverse-shell' (whoani.exe) di avvia la connessione tra la *vittima* e l'*attaccante* che si trova in 'ascolto' attraverso **netcat** sulla porta **4444** (Passo 12).
+
+#### Passo 14 - Garantire la "persistenza" con l'avvio della **reverse-shell** anche dopo un 'riavvio' del *target*   ####
+
+Per garantire una nuova esecuzione della **reverse-shell** anche dopo un riavvio del *target* si è creata una 'Scheduled Task' di windows che avvia il processo 'whoani.exe' (reverse-shell) con privilegi "SYSTEM" ad ogni caricamento del sistema operativo. 
+
+`schtasks /create /sc onstart /tn "WoaniTask" /tr "C:\Windows\System32\whoani.exe" /ru "SYSTEM"`
+
+>Nota: Questa operazione può essere effettuata anche aggiungendo una chiave di registro per il caricamento dell'applicazione in avvio (HKLM\Software\Microsoft\Windows\CurrentVersion\Run) oppure si può valutare l'avvio del processo ad un determinato momento / intervallo di tempo con un altra 'Scheduled Task'. 
+
+#### Passo 15 - Cancellazione dei 'Log' del **registro eventi** del *target* per 'nascondere le tracce dell'attività svolta. ####
+
+Una volta avuto accesso al *target* dalla *reverse-shell* oppure dalla shell *smbexec* (Passo 13) si può forzare la cancellazione dei 'log' del registro eventi anche in maniera selettiva o totale. Di seguito si riporta il comando per la 'cancellazione completa'.
+
+`powershell -Command "Get-EventLog -LogName * | ForEach { Clear-EventLog $_.Log }"`
+
