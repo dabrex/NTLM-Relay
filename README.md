@@ -143,7 +143,7 @@ Per effettuare l'upload della 'reverse-shell' implementata al 'Passo 10' si è u
 
 ------------------------
 
-> Criticità riscontrata: Al fine di rendere possibile l'upload della reverse-shell di è dovuto disabilitare l'antivirus (defender) del *target* in quanto la mancanza di un offuscamento adeguato del codice dell'eseguibile consente il rilevamento di softwware potenzialmente dannoso da parte del *target*.
+> Criticità riscontrata: Al fine di rendere possibile l'upload della reverse-shell di è dovuto disabilitare l'antivirus (defender) del *target* in quanto la mancanza di un offuscamento adeguato del codice dell'eseguibile consente il rilevamento di software potenzialmente dannoso da parte del *target*.
 
 --------------------
 
