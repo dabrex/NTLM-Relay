@@ -169,7 +169,7 @@ Avviando da 'reverse-shell' (whoani.exe) si avvia la connessione tra la *vittima
 
 Per garantire una nuova esecuzione della **reverse-shell** anche dopo un riavvio del *target* si è creata una 'Scheduled Task' di Windows che avvia il processo 'whoani.exe' (reverse-shell) con privilegi "SYSTEM" ad ogni caricamento del sistema operativo. 
 
-`schtasks /create /sc onstart /tn "WoaniTask" /tr "C:\Windows\System32\whoani.exe" /ru "SYSTEM"`
+`schtasks /create /sc onstart /tn "WhoaniTask" /tr "C:\Windows\System32\whoani.exe" /ru "SYSTEM"`
 
 >Nota: Questa operazione può essere effettuata anche aggiungendo una chiave di registro per il caricamento dell'applicazione in avvio (HKLM\Software\Microsoft\Windows\CurrentVersion\Run) oppure si può valutare l'avvio del processo ad un determinato momento / intervallo di tempo con un altra 'Scheduled Task'. 
 
