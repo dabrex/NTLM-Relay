@@ -82,7 +82,7 @@ Avvio prima sessione **ettercap**:
 
 `sudo ettercap -T -q -i eth0 -M arp:remote /10.0.0.1// /10.0.0.100//`
 
-- Il comando completo avvia ettercap per eseguire un attacco di avvelenamento ARP (ARP poisoning) in modalità testo e in modo silenzioso sulla rete specificata dall'interfaccia eth0. L'attacco viene eseguito tra i due host specificati (10.0.0.1 [vittima] e 10.0.0.100 [domain controller]), permettendo a ettercap di intercettare il traffico tra questi due host. In pratica, ettercap convince ciascuno degli host che l'attaccante è l'altro host, reindirizzando così il traffico attraverso l'attaccante, che può poi analizzare, modificare o registrare i dati trasmessi.
+- Il comando completo avvia ettercap per eseguire un attacco di avvelenamento ARP (ARP poisoning) in modalità testo e in modo silenzioso sulla rete specificata dall'interfaccia eth0. L'attacco viene eseguito tra i due host specificati (10.0.0.1 [vittima] e 10.0.0.100 [domain controller]), permettendo a ettercap di intercettare il traffico tra questi due host. In pratica, ettercap cattura il traffico tra i due host e consente all'*attaccante* (posizionato tra le comunicazioni dei due dispositivi) di visionare, modificare o bloccare il traffico.
 
 Avvio seconda sessione **ettercap**: 
 
