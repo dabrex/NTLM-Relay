@@ -193,7 +193,7 @@ La macchina virtuale 'Kali Linux' utilizzata per l'attacco è stata scaricata da
 
 Lo 'spunto' per l'attacco è derivato dalla visione di questo [video](https://www.youtube.com/watch?v=hJlLBOvXo-c).
 
-La parte dell'attacco 'NTLM-Relay' è stata modificata secondo 'esigenza' e le parti di 'Sviluppo pagina web fittizia', 'DNS Spoofing', 'Reverse-Shell', 'Persistence', 'Clear-Events-Logs' sono state prodotte in autonomia attraverso documentazione fruibile on-line e con l'aiuto di 'ChatGPT'. 
+La parte dell'attacco 'NTLM-Relay' è stata modificata secondo 'esigenza' e le parti di 'Sviluppo pagina web fittizia', 'DNS Spoofing', 'Reverse-Shell', 'Persistence', 'Clear-Events-Logs' sono state prodotte in autonomia con l'ausilio di documentazione fruibile on-line e di 'ChatGPT'. 
 
 ----------------
 
