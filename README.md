@@ -95,7 +95,7 @@ Avvio seconda sessione **ettercap**:
 ---------------
 
 
-#### Passo 7 (opzionale) - Cattura delle credenziali dell *vittima* con RESPONDER ####
+#### Passo 7 (opzionale) - Cattura delle credenziali dell *vittima* con RESPONDER
 Sulla macchina *attaccante* si avvia il software **responder**:
 
 `sudo responder -i eth0 -A`
